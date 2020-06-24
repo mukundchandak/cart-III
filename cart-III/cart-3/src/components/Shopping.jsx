@@ -13,10 +13,16 @@ class Shopping extends Component {
                     password:"mukund"
                 }
             ],
+            isAuthenticated: false
         }
     }
     
     addTocart = (payload)=>{
+
+        if(!this.authenticate()){
+            alert('pls log in')
+        }
+
         let cartItem = [...this.state.addTocartArr]
         let id = payload.id
 
@@ -48,11 +54,38 @@ class Shopping extends Component {
         return this.state.addTocartArr
     }
 
+    authenticate = () => {
+        if(this.state.isAuthenticated){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    checkUser = ({username, password}) => {
+        let flag = false
+        this.state.user.forEach(item => {
+            if(item.username === username && item.password === password){
+                flag = true
+            }
+        })
+        this.setState({
+            isAuthenticated: true
+        })
+        if(flag){
+            alert('user logged in');
+        }
+        return flag
+    }
+
 
     render() {
         let appData = {
             addTocart : this.addTocart,
-            getCartItems: this.getCartItems   
+            getCartItems: this.getCartItems,
+            checkUser: this.checkUser,
+            authenticate: this.authenticate
         }
         return (
             <div>

@@ -15,11 +15,10 @@ class Navbar extends Component {
                     <li>
                     <Link to="/cart">Cart</Link>
                     </li>
+                    <li>
+                    <Link to="/login">Login</Link>
+                    </li>
                 </ul>
-                {/* <Link to="/">{Login}</Link>
-                <br/>
-                <Link to="/">{Home}</Link>
-                <br/> */}
             </div>
         )
     }
