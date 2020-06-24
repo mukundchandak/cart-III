@@ -1,25 +1,23 @@
-import React, { Component } from 'react';
-import data from "./data.json"
+import React from 'react';
+import data from './data.json'
+import ProductShow from './ProductShow'
 
-export default class Home extends Component {
+function Home(props) {
+    // console.log(props)
+    const { app } = props
+    console.log(app) 
 
-    handleClick = () => {
-        
-    }
+   const handleClick =(id)=>{
+       console.log(id)
+       let item = data.find(item=>item.id===id)
+       app.addTocart(item)
+   }
 
-    render() {
-        return (
-            <div>
-                Home
-                {data && data.map(item => (
-                    <div key={item.id}>
-                        <div>{item.name}</div>
-                        <div>{item.price}</div>
-                        <img src={item.img} alt="img"/>
-                        <div><button onClick={this.handleClick}>Add to Cart</button></div>
-                    </div>
-                ))}
-            </div>
-        )
-    }
+    return (
+        <div>
+            {data.map(item=><ProductShow key={item.id} {...item} handleClick={handleClick}/>)}
+        </div>
+    );
 }
+
+export default Home;
